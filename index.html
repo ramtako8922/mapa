@@ -1,0 +1,1457 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/MedidaPobrezaMultidimensional_1.js"></script>
+        <script src="data/Viviendassininformacinestrato_2.js"></script>
+        <script src="data/Viviendasestrato45y6_3.js"></script>
+        <script src="data/Viviendasestrato3_4.js"></script>
+        <script src="data/Viviendasestrato2_5.js"></script>
+        <script src="data/Viviendasestrato1_6.js"></script>
+        <script src="data/Viviendassingasnaturalconectadaaredpblica_7.js"></script>
+        <script src="data/Viviendassinaccesoalaelectricidad_8.js"></script>
+        <script src="data/LmitesDepartamentos_9.js"></script>
+        <script src="data/BASE_MAPA_10.js"></script>
+        <script src="data/ZNI_11.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-0.8830165032514534,-83.44796287699431],[13.42056868132215,-57.04747944152679]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_Positronnolabelsretina_0');
+        map.getPane('pane_Positronnolabelsretina_0').style.zIndex = 400;
+        var layer_Positronnolabelsretina_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png', {
+            pane: 'pane_Positronnolabelsretina_0',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_Positronnolabelsretina_0;
+        map.addLayer(layer_Positronnolabelsretina_0);
+        function pop_MedidaPobrezaMultidimensional_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_MedidaPobrezaMultidimensional_1_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_MedidaPobrezaMultidimensional_1rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_MedidaPobrezaMultidimensional_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,215,146,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_MedidaPobrezaMultidimensional_1rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_MedidaPobrezaMultidimensional_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,174,106,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_MedidaPobrezaMultidimensional_1rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_MedidaPobrezaMultidimensional_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,130,67,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_MedidaPobrezaMultidimensional_1rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_MedidaPobrezaMultidimensional_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,106,44,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_MedidaPobrezaMultidimensional_1rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_MedidaPobrezaMultidimensional_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(198,83,20,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_MedidaPobrezaMultidimensional_1');
+        map.getPane('pane_MedidaPobrezaMultidimensional_1').style.zIndex = 401;
+        map.getPane('pane_MedidaPobrezaMultidimensional_1').style['mix-blend-mode'] = 'normal';
+        var layer_MedidaPobrezaMultidimensional_1 = new L.geoJson(json_MedidaPobrezaMultidimensional_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MedidaPobrezaMultidimensional_1',
+            layerName: 'layer_MedidaPobrezaMultidimensional_1',
+            pane: 'pane_MedidaPobrezaMultidimensional_1',
+            onEachFeature: pop_MedidaPobrezaMultidimensional_1,
+            style: style_MedidaPobrezaMultidimensional_1_0,
+        });
+        bounds_group.addLayer(layer_MedidaPobrezaMultidimensional_1);
+        map.addLayer(layer_MedidaPobrezaMultidimensional_1);
+        function pop_Viviendassininformacinestrato_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendassininformacinestrato_2_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendassininformacinestrato_2rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassininformacinestrato_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,211,211,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassininformacinestrato_2rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassininformacinestrato_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,201,201,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassininformacinestrato_2rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassininformacinestrato_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,189,189,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassininformacinestrato_2rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassininformacinestrato_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(167,167,167,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendassininformacinestrato_2');
+        map.getPane('pane_Viviendassininformacinestrato_2').style.zIndex = 402;
+        map.getPane('pane_Viviendassininformacinestrato_2').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendassininformacinestrato_2 = new L.geoJson(json_Viviendassininformacinestrato_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendassininformacinestrato_2',
+            layerName: 'layer_Viviendassininformacinestrato_2',
+            pane: 'pane_Viviendassininformacinestrato_2',
+            onEachFeature: pop_Viviendassininformacinestrato_2,
+            style: style_Viviendassininformacinestrato_2_0,
+        });
+        bounds_group.addLayer(layer_Viviendassininformacinestrato_2);
+        map.addLayer(layer_Viviendassininformacinestrato_2);
+        function pop_Viviendasestrato45y6_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendasestrato45y6_3_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendasestrato45y6_3rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato45y6_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,118,118,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato45y6_3rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato45y6_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,64,64,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato45y6_3rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato45y6_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato45y6_3rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato45y6_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,0,0,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendasestrato45y6_3');
+        map.getPane('pane_Viviendasestrato45y6_3').style.zIndex = 403;
+        map.getPane('pane_Viviendasestrato45y6_3').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendasestrato45y6_3 = new L.geoJson(json_Viviendasestrato45y6_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendasestrato45y6_3',
+            layerName: 'layer_Viviendasestrato45y6_3',
+            pane: 'pane_Viviendasestrato45y6_3',
+            onEachFeature: pop_Viviendasestrato45y6_3,
+            style: style_Viviendasestrato45y6_3_0,
+        });
+        bounds_group.addLayer(layer_Viviendasestrato45y6_3);
+        map.addLayer(layer_Viviendasestrato45y6_3);
+        function pop_Viviendasestrato3_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendasestrato3_4_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendasestrato3_4rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato3_4',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(180,255,154,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato3_4rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato3_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(146,226,122,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato3_4rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato3_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(113,197,91,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato3_4rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato3_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(78,169,59,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato3_4rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato3_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(37,141,25,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendasestrato3_4');
+        map.getPane('pane_Viviendasestrato3_4').style.zIndex = 404;
+        map.getPane('pane_Viviendasestrato3_4').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendasestrato3_4 = new L.geoJson(json_Viviendasestrato3_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendasestrato3_4',
+            layerName: 'layer_Viviendasestrato3_4',
+            pane: 'pane_Viviendasestrato3_4',
+            onEachFeature: pop_Viviendasestrato3_4,
+            style: style_Viviendasestrato3_4_0,
+        });
+        bounds_group.addLayer(layer_Viviendasestrato3_4);
+        map.addLayer(layer_Viviendasestrato3_4);
+        function pop_Viviendasestrato2_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendasestrato2_5_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendasestrato2_5rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato2_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,228,236,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato2_5rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato2_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,193,213,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato2_5rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato2_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,143,177,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato2_5rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato2_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,105,152,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato2_5rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato2_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,71,128,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendasestrato2_5');
+        map.getPane('pane_Viviendasestrato2_5').style.zIndex = 405;
+        map.getPane('pane_Viviendasestrato2_5').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendasestrato2_5 = new L.geoJson(json_Viviendasestrato2_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendasestrato2_5',
+            layerName: 'layer_Viviendasestrato2_5',
+            pane: 'pane_Viviendasestrato2_5',
+            onEachFeature: pop_Viviendasestrato2_5,
+            style: style_Viviendasestrato2_5_0,
+        });
+        bounds_group.addLayer(layer_Viviendasestrato2_5);
+        map.addLayer(layer_Viviendasestrato2_5);
+        function pop_Viviendasestrato1_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendasestrato1_6_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendasestrato1_6rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato1_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,247,255,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato1_6rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato1_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,238,255,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato1_6rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato1_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(143,227,255,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato1_6rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato1_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(83,212,255,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendasestrato1_6rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendasestrato1_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(12,183,242,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendasestrato1_6');
+        map.getPane('pane_Viviendasestrato1_6').style.zIndex = 406;
+        map.getPane('pane_Viviendasestrato1_6').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendasestrato1_6 = new L.geoJson(json_Viviendasestrato1_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendasestrato1_6',
+            layerName: 'layer_Viviendasestrato1_6',
+            pane: 'pane_Viviendasestrato1_6',
+            onEachFeature: pop_Viviendasestrato1_6,
+            style: style_Viviendasestrato1_6_0,
+        });
+        bounds_group.addLayer(layer_Viviendasestrato1_6);
+        map.addLayer(layer_Viviendasestrato1_6);
+        function pop_Viviendassingasnaturalconectadaaredpblica_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendassingasnaturalconectadaaredpblica_7_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendassingasnaturalconectadaaredpblica_7rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassingasnaturalconectadaaredpblica_7',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(226,206,229,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassingasnaturalconectadaaredpblica_7rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassingasnaturalconectadaaredpblica_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,159,203,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassingasnaturalconectadaaredpblica_7rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassingasnaturalconectadaaredpblica_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(167,112,178,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassingasnaturalconectadaaredpblica_7rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassingasnaturalconectadaaredpblica_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(136,66,153,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassingasnaturalconectadaaredpblica_7rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassingasnaturalconectadaaredpblica_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,36,135,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendassingasnaturalconectadaaredpblica_7');
+        map.getPane('pane_Viviendassingasnaturalconectadaaredpblica_7').style.zIndex = 407;
+        map.getPane('pane_Viviendassingasnaturalconectadaaredpblica_7').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendassingasnaturalconectadaaredpblica_7 = new L.geoJson(json_Viviendassingasnaturalconectadaaredpblica_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendassingasnaturalconectadaaredpblica_7',
+            layerName: 'layer_Viviendassingasnaturalconectadaaredpblica_7',
+            pane: 'pane_Viviendassingasnaturalconectadaaredpblica_7',
+            onEachFeature: pop_Viviendassingasnaturalconectadaaredpblica_7,
+            style: style_Viviendassingasnaturalconectadaaredpblica_7_0,
+        });
+        bounds_group.addLayer(layer_Viviendassingasnaturalconectadaaredpblica_7);
+        map.addLayer(layer_Viviendassingasnaturalconectadaaredpblica_7);
+        function pop_Viviendassinaccesoalaelectricidad_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Departamento</th>\
+                        <td>' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Número de Viviendas</th>\
+                        <td>' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Medida de Pobreza Multidimensional</th>\
+                        <td>' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin electricidad</th>\
+                        <td>' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 1</th>\
+                        <td>' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 2</th>\
+                        <td>' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 3</th>\
+                        <td>' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas estrato 4, 5 y 6</th>\
+                        <td>' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin información de estrato</th>\
+                        <td>' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">% Viviendas sin gas natural conectado a la red pública</th>\
+                        <td>' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_Viviendassinaccesoalaelectricidad_8_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Viviendassinaccesoalaelectricidad_8rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassinaccesoalaelectricidad_8',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,113,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassinaccesoalaelectricidad_8rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassinaccesoalaelectricidad_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,218,69,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassinaccesoalaelectricidad_8rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassinaccesoalaelectricidad_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,182,0,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassinaccesoalaelectricidad_8rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassinaccesoalaelectricidad_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,158,0,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_Viviendassinaccesoalaelectricidad_8rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_Viviendassinaccesoalaelectricidad_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,135,0,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Viviendassinaccesoalaelectricidad_8');
+        map.getPane('pane_Viviendassinaccesoalaelectricidad_8').style.zIndex = 408;
+        map.getPane('pane_Viviendassinaccesoalaelectricidad_8').style['mix-blend-mode'] = 'normal';
+        var layer_Viviendassinaccesoalaelectricidad_8 = new L.geoJson(json_Viviendassinaccesoalaelectricidad_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Viviendassinaccesoalaelectricidad_8',
+            layerName: 'layer_Viviendassinaccesoalaelectricidad_8',
+            pane: 'pane_Viviendassinaccesoalaelectricidad_8',
+            onEachFeature: pop_Viviendassinaccesoalaelectricidad_8,
+            style: style_Viviendassinaccesoalaelectricidad_8_0,
+        });
+        bounds_group.addLayer(layer_Viviendassinaccesoalaelectricidad_8);
+        map.addLayer(layer_Viviendassinaccesoalaelectricidad_8);
+        function pop_LmitesDepartamentos_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DPTO_CCDGO'] !== null ? autolinker.link(feature.properties['DPTO_CCDGO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DPTO_CNMBR'] !== null ? autolinker.link(feature.properties['DPTO_CNMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LmitesDepartamentos_9_0() {
+            return {
+                pane: 'pane_LmitesDepartamentos_9',
+                opacity: 1,
+                color: 'rgba(82,82,82,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LmitesDepartamentos_9');
+        map.getPane('pane_LmitesDepartamentos_9').style.zIndex = 409;
+        map.getPane('pane_LmitesDepartamentos_9').style['mix-blend-mode'] = 'normal';
+        var layer_LmitesDepartamentos_9 = new L.geoJson(json_LmitesDepartamentos_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LmitesDepartamentos_9',
+            layerName: 'layer_LmitesDepartamentos_9',
+            pane: 'pane_LmitesDepartamentos_9',
+            onEachFeature: pop_LmitesDepartamentos_9,
+            style: style_LmitesDepartamentos_9_0,
+        });
+        bounds_group.addLayer(layer_LmitesDepartamentos_9);
+        map.addLayer(layer_LmitesDepartamentos_9);
+        function pop_BASE_MAPA_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DPTO_CCDGO'] !== null ? autolinker.link(feature.properties['DPTO_CCDGO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MPIO_CCDGO'] !== null ? autolinker.link(feature.properties['MPIO_CCDGO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MPIO_CDPMP'] !== null ? autolinker.link(feature.properties['MPIO_CDPMP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LATITUD'] !== null ? autolinker.link(feature.properties['LATITUD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LONGITUD'] !== null ? autolinker.link(feature.properties['LONGITUD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STCTNENCUE'] !== null ? autolinker.link(feature.properties['STCTNENCUE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DPTO_NOMBR'] !== null ? autolinker.link(feature.properties['DPTO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MPIO_NOMBR'] !== null ? autolinker.link(feature.properties['MPIO_NOMBR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['N_VIVIENDA'] !== null ? autolinker.link(feature.properties['N_VIVIENDA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_ELEC'] !== null ? autolinker.link(feature.properties['NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTR1'] !== null ? autolinker.link(feature.properties['ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTR2'] !== null ? autolinker.link(feature.properties['ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTR3'] !== null ? autolinker.link(feature.properties['ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTR456'] !== null ? autolinker.link(feature.properties['ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESTR_IN'] !== null ? autolinker.link(feature.properties['ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NO_GAS'] !== null ? autolinker.link(feature.properties['NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MPM'] !== null ? autolinker.link(feature.properties['MPM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_NO_ELEC'] !== null ? autolinker.link(feature.properties['P_NO_ELEC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_ESTR1'] !== null ? autolinker.link(feature.properties['P_ESTR1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_ESTR2'] !== null ? autolinker.link(feature.properties['P_ESTR2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_ESTR3'] !== null ? autolinker.link(feature.properties['P_ESTR3'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_ESTR456'] !== null ? autolinker.link(feature.properties['P_ESTR456'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_ESTR_IN'] !== null ? autolinker.link(feature.properties['P_ESTR_IN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['P_NO_GAS'] !== null ? autolinker.link(feature.properties['P_NO_GAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BASE_MAPA_10_0() {
+            return {
+                pane: 'pane_BASE_MAPA_10',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BASE_MAPA_10');
+        map.getPane('pane_BASE_MAPA_10').style.zIndex = 410;
+        map.getPane('pane_BASE_MAPA_10').style['mix-blend-mode'] = 'normal';
+        var layer_BASE_MAPA_10 = new L.geoJson(json_BASE_MAPA_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BASE_MAPA_10',
+            layerName: 'layer_BASE_MAPA_10',
+            pane: 'pane_BASE_MAPA_10',
+            onEachFeature: pop_BASE_MAPA_10,
+            style: style_BASE_MAPA_10_0,
+        });
+        bounds_group.addLayer(layer_BASE_MAPA_10);
+        map.addLayer(layer_BASE_MAPA_10);
+        function pop_ZNI_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">LOCALIDAD</th>\
+                        <td>' + (feature.properties['LOCALIDAD'] !== null ? autolinker.link(feature.properties['LOCALIDAD'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ZNI_11_0() {
+            return {
+                pane: 'pane_ZNI_11',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ZNI_11');
+        map.getPane('pane_ZNI_11').style.zIndex = 411;
+        map.getPane('pane_ZNI_11').style['mix-blend-mode'] = 'normal';
+        var layer_ZNI_11 = new L.geoJson(json_ZNI_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ZNI_11',
+            layerName: 'layer_ZNI_11',
+            pane: 'pane_ZNI_11',
+            onEachFeature: pop_ZNI_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ZNI_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_ZNI_11);
+        map.addLayer(layer_ZNI_11);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ZNI_11.png" /> ZNI': layer_ZNI_11,'<img src="legend/BASE_MAPA_10.png" /> BASE_MAPA': layer_BASE_MAPA_10,'<img src="legend/LmitesDepartamentos_9.png" /> Límites Departamentos': layer_LmitesDepartamentos_9,'Viviendas sin acceso a la electricidad <br /><table><tr><td style="text-align: center;"><img src="legend/Viviendassinaccesoalaelectricidad_8_060.png" /></td><td>0% - 6%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassinaccesoalaelectricidad_8_6151.png" /></td><td>6% - 15%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassinaccesoalaelectricidad_8_15262.png" /></td><td>15% - 26%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassinaccesoalaelectricidad_8_26413.png" /></td><td>26% - 41%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassinaccesoalaelectricidad_8_419894.png" /></td><td>41% - 98,9%</td></tr></table>': layer_Viviendassinaccesoalaelectricidad_8,'Viviendas sin gas natural conectada a red pública<br /><table><tr><td style="text-align: center;"><img src="legend/Viviendassingasnaturalconectadaaredpblica_7_0310.png" /></td><td>0% - 31%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassingasnaturalconectadaaredpblica_7_31591.png" /></td><td>31% - 59%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassingasnaturalconectadaaredpblica_7_59772.png" /></td><td>59% - 77%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassingasnaturalconectadaaredpblica_7_77953.png" /></td><td>77% - 95%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassingasnaturalconectadaaredpblica_7_951004.png" /></td><td>95% - 100%</td></tr></table>': layer_Viviendassingasnaturalconectadaaredpblica_7,'Viviendas estrato 1<br /><table><tr><td style="text-align: center;"><img src="legend/Viviendasestrato1_6_0290.png" /></td><td>0% - 29%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato1_6_29481.png" /></td><td>29% - 48%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato1_6_48682.png" /></td><td>48% - 68%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato1_6_68873.png" /></td><td>68% - 87%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato1_6_871004.png" /></td><td>87% - 100%</td></tr></table>': layer_Viviendasestrato1_6,'Viviendas estrato 2<br /><table><tr><td style="text-align: center;"><img src="legend/Viviendasestrato2_5_080.png" /></td><td>0% - 8%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato2_5_8251.png" /></td><td>8% - 25%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato2_5_25412.png" /></td><td>25% - 41%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato2_5_41573.png" /></td><td>41% - 57%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato2_5_579344.png" /></td><td>57% - 93,4%</td></tr></table>': layer_Viviendasestrato2_5,'Viviendas estrato 3<br /><table><tr><td style="text-align: center;"><img src="legend/Viviendasestrato3_4_030.png" /></td><td>0% - 3%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato3_4_391.png" /></td><td>3% - 9%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato3_4_9192.png" /></td><td>9% - 19%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato3_4_19253.png" /></td><td>19% - 25%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato3_4_256644.png" /></td><td>25% - 66,4%</td></tr></table>': layer_Viviendasestrato3_4,'Viviendas estrato 4, 5 y 6<br /><table><tr><td style="text-align: center;"><img src="legend/Viviendasestrato45y6_3_020.png" /></td><td>0% - 2%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato45y6_3_241.png" /></td><td>2% - 4%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato45y6_3_472.png" /></td><td>4% - 7%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendasestrato45y6_3_74383.png" /></td><td>7% - 43,8%</td></tr></table>': layer_Viviendasestrato45y6_3,'Viviendas sin información estrato<br /><table><tr><td style="text-align: center;"><img src="legend/Viviendassininformacinestrato_2_030.png" /></td><td>0% - 3%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassininformacinestrato_2_3121.png" /></td><td>3% - 12%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassininformacinestrato_2_12412.png" /></td><td>12% - 41%</td></tr><tr><td style="text-align: center;"><img src="legend/Viviendassininformacinestrato_2_41993.png" /></td><td>41% - 99%</td></tr></table>': layer_Viviendassininformacinestrato_2,'Medida Pobreza Multidimensional<br /><table><tr><td style="text-align: center;"><img src="legend/MedidaPobrezaMultidimensional_1_45280.png" /></td><td>4,5% - 28%</td></tr><tr><td style="text-align: center;"><img src="legend/MedidaPobrezaMultidimensional_1_28391.png" /></td><td>28% - 39%</td></tr><tr><td style="text-align: center;"><img src="legend/MedidaPobrezaMultidimensional_1_39512.png" /></td><td>39% - 51%</td></tr><tr><td style="text-align: center;"><img src="legend/MedidaPobrezaMultidimensional_1_51683.png" /></td><td>51% - 68%</td></tr><tr><td style="text-align: center;"><img src="legend/MedidaPobrezaMultidimensional_1_689854.png" /></td><td>68% - 98,5%</td></tr></table>': layer_MedidaPobrezaMultidimensional_1,"Positron [no labels] (retina)": layer_Positronnolabelsretina_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_LmitesDepartamentos_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['DPTO_CNMBR'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['DPTO_CNMBR']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_LmitesDepartamentos_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Viviendassinaccesoalaelectricidad_8,layer_LmitesDepartamentos_9,layer_ZNI_11]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Viviendassinaccesoalaelectricidad_8,layer_LmitesDepartamentos_9,layer_ZNI_11]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Viviendassinaccesoalaelectricidad_8,layer_LmitesDepartamentos_9,layer_ZNI_11]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Viviendassinaccesoalaelectricidad_8,layer_LmitesDepartamentos_9,layer_ZNI_11]);
+        });
+        </script>
+    </body>
+</html>
